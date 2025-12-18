@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import com.dibimbing.api_manage_product.services.ProductService;
 import com.dibimbing.api_manage_product.dto.*;
 import org.springframework.http.ResponseEntity;
-
+import jakarta.validation.Valid;
 
 
 
@@ -24,17 +24,18 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ProductResponseDTO> addProduct(@RequestBody AddProductRequestDTO addProductRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> addProduct(@Valid @RequestBody AddProductRequestDTO addProductRequestDTO) {
+
         return productService.addProduct(addProductRequestDTO);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id, @RequestBody UpdateProductRequestDTO updateProductRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id, @Valid @RequestBody UpdateProductRequestDTO updateProductRequestDTO) {
         return productService.updateProduct(id, updateProductRequestDTO);
     }
 
     @PatchMapping("/update-stock/{id}")
-    public ResponseEntity<ProductResponseDTO> updateStock(@PathVariable Long id, @RequestBody UpdateStockRequestDTO updateStockRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> updateStock(@PathVariable Long id, @Valid @RequestBody UpdateStockRequestDTO updateStockRequestDTO) {
         return productService.updateStock(id, updateStockRequestDTO);
     }
 

@@ -160,3 +160,36 @@ Soft delete a product by ID.
 - **Method**: `DELETE`
 - **Success Response**:
   - **Code**: 204 NO CONTENT
+
+## Edge Cases for Validation Testing
+
+Use the following scenarios to test the robustness and validation logic of the API.
+
+### 1. Add / Update Product Validation
+
+Test these with `POST /api/products/add` or `PUT /api/products/update/{id}`.
+
+| Scenario           | Input Data                   | Expected Result                                                      |
+| :----------------- | :--------------------------- | :------------------------------------------------------------------- |
+| **Empty Name**     | `"name": ""`                 | **400 Bad Request**<br>Validation error: Name is required            |
+| **Negative Price** | `"price": -100`              | **400 Bad Request**<br>Validation error: Price must be > 0           |
+| **Minimum Stock**  | `"stock": -1`                | **400 Bad Request**<br>Validation error: Stock must be >= 0          |
+| **Duplicate Name** | `"name": "Existing Product"` | **400 Bad Request**<br>Validation error: Product name already exists |
+
+**NOTES:** Updating a product with its current name will not trigger a duplicate name error.
+
+### 2. Update Stock Validation
+
+Test with `PATCH /api/products/update-stock/{id}`.
+
+| Scenario                | Input Data                             | Expected Result                                                                          |
+| :---------------------- | :------------------------------------- | :--------------------------------------------------------------------------------------- |
+| **Negative Sell Stock** | `"sellStock": -5`                      | **400 Bad Request**<br>Validation error: Sell stock must be positive (handled by `@Min`) |
+| **Insufficient Stock**  | `"sellStock": 100` (where stock < 100) | **400 Bad Request**<br>Validation error: Stock is not enough                             |
+
+### 3. General Edge Cases
+
+| Scenario              | Action                                | Expected Result                                                      |
+| :-------------------- | :------------------------------------ | :------------------------------------------------------------------- |
+| **Product Not Found** | Update/Stock/Delete with ID `99999`   | **404 Not Found**<br>Error: Product not found                        |
+| **Invalid ID Format** | Request to `/api/products/update/abc` | **400 Bad Request**<br> Validation error: Invalid value for id 'abc' |

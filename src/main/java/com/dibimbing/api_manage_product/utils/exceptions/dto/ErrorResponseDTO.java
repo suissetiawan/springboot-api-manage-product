@@ -6,8 +6,8 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorResponseDTO {
+public class ErrorResponseDTO<T> {
     private int status;
-    private String message;
-    private String path;
+    private String error;
+    private T message;
 }
