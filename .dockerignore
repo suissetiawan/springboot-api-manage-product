@@ -1,0 +1,42 @@
+# Build artifacts
+target/
+build/
+*.jar
+*.war
+*.ear
+
+# Git
+.git/
+.gitignore
+
+# IDEs and editors
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+
+# Environment and secrets
+.env
+application.properties
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# GitHub
+.github/
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
