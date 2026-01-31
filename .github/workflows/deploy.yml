@@ -13,7 +13,7 @@ jobs:
       # Deployment Configuration - Change image name here
       IMAGE_NAME: spring-student03-app
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      APP_DIR: /home/student/spring-app/student03 # Sesuaikan dengan direktori di VPS
+      APP_DIR: /home/student/spring-app/student3 # Sesuaikan dengan direktori di VPS
 
     steps:
       - name: Checkout source code
