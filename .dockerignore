@@ -24,11 +24,6 @@ build/
 .env
 application.properties
 
-# Docker
-Dockerfile
-docker-compose.yml
-.dockerignore
-
 # OS files
 .DS_Store
 Thumbs.db
